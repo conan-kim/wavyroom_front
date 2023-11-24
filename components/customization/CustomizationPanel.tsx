@@ -157,15 +157,20 @@ const CustomizationPanel = () => {
     };
         
   return (
-    <div className='flex flex-col max-h-[62vh] lg:max-h-[100vh] '>
+    <div className='flex flex-col h-[calc(100vh-390px)] lg:h-[100vh] '>
         <section className='w-full overflow-y-scroll'>
-            <div className="productName flex gap-4  mx-[24px] md:mx-8 my-8" >
+            <div className="productName flex flex-col  gap-4 lg:gap-0  mx-[24px] md:mx-8 my-8" >
                 <span className='text-[24px] md:text-[32px] font-light items-center'>
                     <select id="Evo" name="Evo" form="Evo">
                         <option value="Evo">Evo</option>
                         <option value="Evo">Evo</option>
                         <option value="Evo">Evo</option>
                     </select>
+                </span>
+
+                <span className='block lg:hidden '>
+                모듈러건축시스템 기반으로 '웨이비룸'이라는 주거공간을 만들고 있으며,<br />
+                '공간의 제품화'에 집중합니다.
                 </span>
             </div>
             <div className="tabs flex mx-[24px] md:mx-8 mb-8">
