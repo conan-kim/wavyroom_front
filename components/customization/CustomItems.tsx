@@ -50,7 +50,7 @@ const CustomItems = ({navigateToSettings}: any) => {
     },
    ]
   return (
-    <div className='flex flex-col max-h-[100vh]'>
+    <div className='flex flex-col max-h-[62vh] lg:max-h-[100vh]'>
       <div className='w-full overflow-y-scroll'>
         <div className="p-8">
           <div className="text-[32px] font-light mb-4 md:text-[24px]"><h1>웨이비룸</h1></div>
@@ -66,8 +66,8 @@ const CustomItems = ({navigateToSettings}: any) => {
             )}
         </div>
       </div>
-      <div className="p-4"> 
-         <button onClick={() => navigateToSettings(true)} className=" flex justify-center items-center gap-[4px] w-full bg-black text-white py-[10px] px-4 rounded">
+      <div className="p-4 border-t-[1px]"> 
+         <button onClick={() => navigateToSettings(true)} className=" flex justify-center items-center gap-[4px] w-full bg-black text-white py-[10px] px-4 text-[12px] rounded-full">
             <span>
               커스텀하기
             </span>

@@ -157,7 +157,7 @@ const CustomizationPanel = () => {
     };
         
   return (
-    <div className='flex flex-col max-h-[100vh]'>
+    <div className='flex flex-col max-h-[62vh] lg:max-h-[100vh] '>
         <section className='w-full overflow-y-scroll'>
             <div className="productName flex gap-4 m-8" >
                 <span>Evo</span>
