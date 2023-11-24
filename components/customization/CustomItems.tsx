@@ -1,10 +1,10 @@
 import React from 'react'
 import CustomizationCard from './CustomizationCard';
-import CardImg2 from "@/assets/CustomCard/4-XEf3eLl5k-transformed 2.png";
-import CardImg1 from "@/assets/CustomCard/image 2058.png";
-import CardImg3 from "@/assets/CustomCard/image 2062.png";
-import CardImg4 from "@/assets/CustomCard/image 2054.png";
-import CardImg5 from "@/assets/CustomCard/image 2059.png";
+import CardImg2 from "@/assets/CustomCard/product-img1.png";
+import CardImg1 from "@/assets/CustomCard/product-img2.png";
+import CardImg3 from "@/assets/CustomCard/product-img3.png";
+import CardImg4 from "@/assets/CustomCard/product-img4.png";
+import CardImg5 from "@/assets/CustomCard/product-img5.png";
 
 const CustomItems = ({navigateToSettings}: any) => {
   const data= [
