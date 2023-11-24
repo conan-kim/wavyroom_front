@@ -16,7 +16,7 @@ export interface CustomizationOptionsProps {
 const Card:FC<option> = ({option,isSelected}) => {
   return (
     <div className='p-4 flex justify-between border-[1px] rounded-xl hover:bg-[#F9F9FA]'>
-        <div className="propName text-[14px] font-medium">{option}</div>
+        <div className="propName text-[12px] font-medium">{option}</div>
         <div className="radioButton"><input type="radio" /></div>
     </div>
   )
@@ -27,7 +27,7 @@ const CustomizationOptions: FC<{ customizationOptions: CustomizationOptionsProps
     <div className='flex flex-col gap-4'>
         {customizationOptions.map((opt,index)=>{
             return (
-                <section className='px-8 py-4' key={`opt-${index}`}>
+                <section className='px-[24px] sm:px-8 py-4' key={`opt-${index}`}>
                     <div className='flex flex-col gap-4'>
                         <div className='flex justify-between'>
                             <span className='optionName text-[14px] font-medium'>{opt.name}</span>

@@ -159,22 +159,18 @@ const CustomizationPanel = () => {
   return (
     <div className='flex flex-col max-h-[62vh] lg:max-h-[100vh] '>
         <section className='w-full overflow-y-scroll'>
-            <div className="productName flex gap-4 m-8" >
-                <span>Evo</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <g clipPath="url(#clip0_1099_11599)">
-                        <path d="M12.0004 15.7104L5.65039 9.35039L6.35039 8.65039L12.0004 14.2904L17.6504 8.65039L18.3504 9.35039L12.0004 15.7104Z" fill="black"/>
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_1099_11599">
-                            <rect width="24" height="24" fill="white"/>
-                        </clipPath>
-                    </defs>
-                </svg>
+            <div className="productName flex gap-4  mx-[24px] md:mx-8 my-8" >
+                <span className='text-[24px] md:text-[32px] font-light items-center'>
+                    <select id="Evo" name="Evo" form="Evo">
+                        <option value="Evo">Evo</option>
+                        <option value="Evo">Evo</option>
+                        <option value="Evo">Evo</option>
+                    </select>
+                </span>
             </div>
-            <div className="tabs flex mx-8 mb-8">
+            <div className="tabs flex mx-[24px] md:mx-8 mb-8">
                 <div className="exteriorTab w-6/12">
-                    <p className='text-[12px] border-b-[1px] border-jetBlack font-medium py-4'>외부</p>
+                    <p className='text-[14px] md:text-[12px] border-b-[1px] border-jetBlack font-medium py-4'>외부</p>
                 </div>
                 <div className="interiroTab w-6/12">
                     <p className='text-[12px] border-b-[1px] font-medium py-4 text-midGray'>내부</p>
@@ -202,7 +198,7 @@ const CustomizationPanel = () => {
                         </svg>
                     </div>
                     <div className="customizeButton flex gap-[4px] px-4 py-[10px] text-white rounded-full justify-center w-full items-center bg-offBlack">
-                        <span>커스텀하기</span>
+                        <span className='text-[12px] font-medium'>커스텀하기</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                             <g clipPath="url(#clip0_2583_274)">
                                 <path d="M10.02 4.23828L9.4875 4.77078L13.3425 8.62578H3.375V9.37578H13.35L9.4875 13.2383L10.0125 13.7633L14.7825 9.00828L10.02 4.23828Z" fill="white"/>
