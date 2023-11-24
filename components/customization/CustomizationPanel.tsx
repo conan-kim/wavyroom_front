@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import SelectColorCard from './SelectColorCard'
 import CustomizationOptions, { CustomizationOptionsProps } from './CustomizationOptions'
+import Select from "react-select";
 
 const CustomizationPanel = () => {
     const [customizationOptions ,setCustomizationOptions] = useState<CustomizationOptionsProps[]>([
@@ -155,17 +156,67 @@ const CustomizationPanel = () => {
             });
           });
     };
-        
+
+    const OPTIONS = [
+        {value:'Evo1' ,label:'Evo'},
+        {value:'Evo2' ,label:'Evo'},
+        {value:'Evo3 ' ,label:'Evo'},
+    ]
+
   return (
     <div className='flex flex-col h-[calc(100vh-390px)] lg:h-[100vh] '>
         <section className='w-full overflow-y-scroll'>
             <div className="productName flex flex-col  gap-4 lg:gap-0  mx-[24px] md:mx-8 my-8" >
                 <span className='text-[24px] md:text-[32px] font-light items-center'>
-                    <select id="Evo" name="Evo" form="Evo">
-                        <option value="Evo">Evo</option>
-                        <option value="Evo">Evo</option>
-                        <option value="Evo">Evo</option>
-                    </select>
+                <Select
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 0,
+        borderWidth: 0,
+        colors: {
+          ...theme.colors,
+          primary25: "none",
+          primary: "#ff5b00",
+        },
+      })}
+      isSearchable={false}
+      styles={{
+        container: (baseStyles:any, state:any) => ({
+          ...baseStyles,
+          ":focus": {
+
+          },
+        }),
+        control: (baseStyles:any) => ({
+            display:'flex',
+            height:'45px',
+
+        }),
+        indicatorSeparator: () => ({ display: "hidden" }),
+        valueContainer: (baseStyles:any) => ({
+         
+        }),
+        indicatorsContainer: (baseStyles:any) => ({
+            display:'flex',
+            alignItems:'center',
+        }),
+        option: (baseStyles:any) => ({
+          background:'#F7F7F7',
+          padding:'16px',
+          color:'black',
+          fontSize:'14px',
+          fontWeight:'500',
+          ":hover": {
+            backgroundColor: "#E5E5E5",
+            color: "black",
+           
+          },
+        }),
+      }}
+      options={OPTIONS}
+      value={OPTIONS[0]}
+      onChange={() => {}}
+    />
                 </span>
 
                 <span className='block lg:hidden '>
