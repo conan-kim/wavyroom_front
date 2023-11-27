@@ -334,6 +334,7 @@ const Sidebar = ({ open, setOpen, menuType }: any) => {
           )}
           onInteractOutside={closeSidebar}
           onCloseClick={closeSidebar}
+          menuType={menuType}
         >
           {renderMenus()}
           {renderModels()}
