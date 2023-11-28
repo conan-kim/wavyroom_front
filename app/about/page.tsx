@@ -12,7 +12,7 @@ const About = () => {
     <main className="flex flex-col flex-1">
       <section>
         <div className="flex flex-col lg:flex-col-reverse">
-          <div className="flex flex-col md:flex-row px-4 py-8 md:px-8 md:py-16 gap-2">
+          <div className="flex flex-col gap-2 md:gap-4 lg:gap-2 md:flex-row px-4 py-8 md:px-8 md:py-16">
             <div className="flex flex-1 text-displaySM md:text-displayMD lg:text-displayLG font-light">
               Spacewavy
             </div>
@@ -23,7 +23,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="w-full pb-8 lg:pb-16">
+          <div className="w-full px-0 md:px-8  pb-8 lg:pb-16">
             <Image
               className="object-cover w-full h-full"
               src={AboutMainImage}
@@ -65,15 +65,17 @@ const About = () => {
         </div>
       </section>
       <section className="bg-lightGray px-4 py-8 md:px-8 md:py-16">
-        <Label>우리의 제품</Label>
+        <div className="mb-2 md:mb-[24px]">
+          <Label>우리의 제품</Label>
+        </div>
         <div className="flex flex-1 flex-col md:flex-row">
-          <div className="flex flex-1 flex-col lg:flex-row gap-4">
+          <div className="flex flex-1 flex-col lg:flex-row gap-6">
             <div className="lg:flex lg:flex-1 text-displaySM md:text-displayMD lg:text-displayLG">
               세심하게 설계되고,
               <br />
               완벽하게 제작된 공간
             </div>
-            <div className="lg:flex lg:flex-1 text-bodySM md:text-bodyMD lg:text-bodyLG pr-0 lg:pr-[116px]">
+            <div className="lg:flex lg:flex-1 text-bodyMD lg:text-bodyLG pr-0 lg:pr-[116px]">
               우리는 모두에게 더 나은 집이 있는 미래를 바라봅니다. 모든 사람들이
               각자 세심하게 설계되고 잘 지어진 집에서 사는 것, 공간이 영감을
               주고 기능하며 환경을 생각하는 것, 우리가 사는 공간이 우리의 삶을
@@ -92,7 +94,7 @@ const About = () => {
         </div>
       </section>
       <section className="bg-lightGray">
-        <div className="flex flex-1 flex-col md:flex-row py-4 px-0 md:p-8 gap-4">
+        <div className="flex flex-1 flex-col md:flex-row pt-4 pb-8 px-0 md:p-8 gap-4">
           <div className="flex flex-1">
             <Image
               className="object-cover w-full h-full"
@@ -112,13 +114,13 @@ const About = () => {
       <section>
         <div className="flex flex-1 flex-col px-4 py-8 md:px-8 md:py-16 gap-2 md:gap-6">
           <Label>우리의 가치</Label>
-          <div className="flex flex-1 flex-col md:flex-row gap-6 md:gap-4">
+          <div className="flex flex-1 flex-col md:flex-row  gap-6">
             <div className="flex flex-1 text-displaySM md:text-displayMD lg:text-displayLG">
               쉬운 건설과정
               <br />
               가치있는 주거공간
             </div>
-            <div className="flex flex-1 flex-col gap-8">
+            <div className="flex flex-1 flex-col gap-8  lg:pr-[116px]">
               <div className="text-[12px] md:text-[14px] lg:text-[16px]">
                 기술은 산업을 변화시켰습니다. 다음은 건설 방식입니다. 이제
                 우리는 집을 지을 수 있는 더 나은 방법을 만들었습니다. 투명한
@@ -127,7 +129,7 @@ const About = () => {
                 생산합니다.
               </div>
               <div className="flex flex-1 flex-col">
-                <div className="flex flex-1 flex-col py-4 md:py-8">
+                <div className="flex flex-1 flex-col py-4 md:py-8 gap-4">
                   <div className="text-[24px] md:text-[28px] lg:text-[32px]">
                     일정하고 높은 품질의 생산
                   </div>
@@ -138,7 +140,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="h-[1px] bg-gray" />
-                <div className="flex flex-1 flex-col py-4 md:py-8">
+                <div className="flex flex-1 flex-col py-4 md:py-8 gap-4">
                   <div className="text-[24px] md:text-[28px] lg:text-[32px]">
                     뛰어난 디자인
                   </div>
@@ -149,7 +151,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="h-[1px] bg-gray" />
-                <div className="flex flex-1 flex-col py-4 md:py-8">
+                <div className="flex flex-1 flex-col py-4 md:py-8 gap-4">
                   <div className="text-[24px] md:text-[28px] lg:text-[32px]">
                     빠른 제작 기간
                   </div>
@@ -165,10 +167,24 @@ const About = () => {
       </section>
       <section className="p-4 md:p-8">
         <div className="flex flex-1 flex-col bg-offBlack items-center justify-center gap-4 px-4 py-24 md:py-42">
-          <div className="text-white text-[14px] md:text-[24px]">
+          <div className="text-white text-[18px] md:text-[28px]">
             스페이스웨이비에 합류하고 싶나요?
           </div>
-          <div className="text-orange text-[14px]">채용정보 보기</div>
+          <div className="flex gap-[4px] px-4 py-2">
+            <span className="text-orange text-[14px]">
+            채용정보 보기    
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+              <g clip-path="url(#clip0_2883_2803)">
+              <path d="M10.52 4.78955L9.9875 5.32205L13.8425 9.17705H3.875V9.92705H13.85L9.9875 13.7896L10.5125 14.3146L15.2825 9.55955L10.52 4.78955Z" fill="#FF5B00"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_2883_2803">
+              <rect width="18" height="18" fill="white" transform="translate(0.5 0.552246)"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </div>
         </div>
       </section>
     </main>

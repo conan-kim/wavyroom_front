@@ -53,7 +53,7 @@ const ProductCarousel = () => {
     ]
 
   return (
-    <div className="embla p-[25.6px] md:p-0 lg:p-[25.6px]">
+    <div className="embla p-0">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {CarosolItems.map((c, index)=>{
@@ -68,7 +68,7 @@ const ProductCarousel = () => {
                   />
                 </div>
                 <div className="flex flex-col items-center justify-between gap-8 pt-8">
-                  <div className="flex gap-[4px] text-[16px] font-light">
+                  <div className="flex gap-[4px] text-[12px] md:text-[14px] lg:text-[16px] font-light">
                   <span>{c.imageText[0]}</span>
                   <span className="opacity-40">{c.imageText[1]}</span>
 
