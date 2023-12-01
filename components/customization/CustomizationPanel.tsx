@@ -1,122 +1,16 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import CloseIcone from "@/assets/icons/Close-icon.svg";
 import Image from 'next/image';
 import SelectColorCard from './SelectColorCard'
 import CustomizationOptions, { CustomizationOptionsProps } from './CustomizationOptions'
 import Select from "react-select";
-import ModalProvider, { useModal } from 'mui-modal-provider';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 
-interface SimpleDialogProps extends DialogProps {
-    title: string,
-    handleNameChange: any,
-    handleEmailChange: any,
-    handlePhoneChange: any,
-    isButtonDisabled: any,
-  };
-  const SimpleDialog: React.FC<SimpleDialogProps> = ({ handleNameChange, handleEmailChange, handlePhoneChange, isButtonDisabled, title, ...props }) => (
-    <Dialog {...props}>
-    <div className='lg:px-8 lg:py-8'>
-        <div className='lg:text-[32px] text-[28px] font-light pb-[8px] color=[#000]'> 
-            <h1>내가 만든 모델을 예약해보세요</h1>
-        </div>
-        <div className='text-[14px] font-light pb-4 color=[#4D4D4D]'>
-            <p>고객님의 정보를 입력하시면 이메일로 보내드리겠습니다.</p>
-        </div>
-        <div>
-        <input
-        className='py-[24px] text-[14px] color=[#B2B2B2]'
-          type='text'
-          placeholder='이름을 입력하세요'
-          onChange={handleNameChange}
-        />
-        
-        <div
-         className='focus:border-b border-b-[1px] border-gray-500 mb-4'
-        >
-        </div>
-      </div>
-      <div>
-        <input
-        className='py-[24px] '
-          type='text'
-          placeholder='이메일 주소를 입력하세요'
-          onChange={handleEmailChange}
-        />
-        <div
-         className='focus:border-b border-b-[1px] border-gray-500 mb-4'
-        >
-        </div>
-      </div>
-      <div>
-        <input
-        className='py-[24px] '
-          type='text'
-          placeholder='휴대전화번호를 입력하세요'
-          onChange={handlePhoneChange}
-        />
-        <div
-         className='focus:border-b border-b-[1px] border-gray-500 mb-16'
-        >
-        </div>
-      </div>
-      <button
-       disabled={isButtonDisabled}
-      className=" flex justify-center items-center gap-1 w-full bg-gray text-white py-[10px] px-4 text-[12px] font-medium rounded-full">
-    <span>
-            완료
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <g clipPath="url(#clip0_2619_2241)">
-              <path d="M10.02 4.23828L9.4875 4.77078L13.3425 8.62578H3.375V9.37578H13.35L9.4875 13.2383L10.0125 13.7633L14.7825 9.00828L10.02 4.23828Z" fill="white"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_2619_2241">
-                <rect width="18" height="18" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-            </button>
-            </div>
-    </Dialog>
-  );
+interface CustomizationPanelProps {
+    handlePopupOpen:any,
+}
 
-const CustomizationPanel = () => {
-    const { showModal } = useModal();
-    const[name, setName]=useState('');
-    const[email, setEmail]=useState('');
-    const[phone, setPhone]=useState('');
-    const [formElaments ,setFormElements] = useState({
-        name:'',
-        email:'',
-        phone:''
-    })
-    const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
-    
-    const handleNameChange = (e:any) => {
-        setName(e.target.value);
-      };
-
-      const handleEmailChange = (e:any) => {
-        setEmail(e.target.value);
-      };
-
-      const handlePhoneChange = (e:any) => {
-        setPhone(e.target.value);
-      };
-
-      const validateInputs = () => {
-        if (!name || !email || !phone) {
-          setIsButtonDisabled(true);
-        } else {
-          setIsButtonDisabled(false);
-        }
-      };
-    //   useEffect(()=> {
-    //     validateInputs()
-    //   },[name,email,phone])
+const CustomizationPanel:FC<CustomizationPanelProps> = ({handlePopupOpen}) => {
 
     const [customizationOptions ,setCustomizationOptions] = useState<CustomizationOptionsProps[]>([
         {
@@ -275,8 +169,14 @@ const CustomizationPanel = () => {
         {value:'Evo3 ' ,label:'Evo'},
     ]
 
+
+
   return (
+    <>
+
     <div className='flex flex-col h-[65vh] lg:h-[100vh] '>
+        <div>
+        </div>
         <section className='w-full overflow-y-scroll'>
             <div className="productName flex flex-col  gap-4 lg:gap-0  mx-[24px] md:mx-8 my-8" >
                 <span className='text-[24px] lg:text-[32px] font-light items-center'>
@@ -365,7 +265,7 @@ const CustomizationPanel = () => {
                         <path d="M5.66628 1.63938V8.99938H6.33294V1.63938L8.43294 3.73271L8.89961 3.26604L5.99961 0.359375L3.09961 3.26604L3.56628 3.73271L5.66628 1.63938Z" fill="#1C1C1F"/>
                     </svg>
                 </div>
-                <div className="customizeButton flex gap-[4px] px-4 py-[10px] text-white rounded-full justify-center w-full items-center bg-offBlack" onClick={() => showModal(SimpleDialog, { title: 'popup' , handleNameChange: {handleNameChange}, handleEmailChange: {handleEmailChange}, handlePhoneChange: {handlePhoneChange}, isButtonDisabled:{isButtonDisabled} })}>
+                <div className="customizeButton flex gap-[4px] px-4 py-[10px] text-white rounded-full justify-center w-full items-center bg-offBlack" onClick={handlePopupOpen}>
                     <span className='text-[12px] font-medium'>커스텀하기</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <g clipPath="url(#clip0_2583_274)">
@@ -381,13 +281,8 @@ const CustomizationPanel = () => {
             </section>
         </div>
     </div>
+</>
   )
 }
 
-const container = document.getElementById('root');
-const App=()=>(
-    <ModalProvider>
-      <CustomizationPanel />
-    </ModalProvider>
-  );
-  export default App;
+export default CustomizationPanel;
