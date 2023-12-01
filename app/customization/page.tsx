@@ -96,7 +96,8 @@ const Customization = () => {
   }
 
 return(
-  <div className="flex flex-col lg:flex-row  max-w-[100vw] overflow-hidden h-[100vh]">
+  <>
+    {/* <div className="flex flex-col lg:flex-row  max-w-[100vw] overflow-hidden h-[100vh]">
       <div className={`w-full lg:w-[65%] bg-[#F9F9FA] flex flex-col h-[35vh] lg:h-full overflow-hidden ${openMenu ? 'bg-[#00000080]' :''} `} onClick={openMenu ? handleMenuToggle : () => {}}>
         <div className="flex pt-[24px]  lg:pt-8 pl-[24px]  lg:pl-8 pb-[20px] lg:pb-[24px] gap-[8px]"> 
             <Link href='/'>
@@ -123,7 +124,11 @@ return(
         </div>
 
       </div>
+  </div> */}
+  <div>
+
   </div>
+  </>
 )
 };
 
