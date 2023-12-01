@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CloseIcone from "@/assets/icons/Close-icon.svg";
 import Image from 'next/image';
 import SelectColorCard from './SelectColorCard'
@@ -11,50 +11,113 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 interface SimpleDialogProps extends DialogProps {
     title: string,
+    handleNameChange: any,
+    handleEmailChange: any,
+    handlePhoneChange: any,
+    isButtonDisabled: any,
   };
-  const SimpleDialog: React.FC<SimpleDialogProps> = ({ title, ...props }) => (
+  const SimpleDialog: React.FC<SimpleDialogProps> = ({ handleNameChange, handleEmailChange, handlePhoneChange, isButtonDisabled, title, ...props }) => (
     <Dialog {...props}>
-      <DialogTitle>
-        <div className="flex justify-end"> 
-         <Image src={CloseIcone} alt="icon"/>
+    <div className='lg:px-8 lg:py-8'>
+        <div className='lg:text-[32px] text-[28px] font-light pb-[8px] color=[#000]'> 
+            <h1>내가 만든 모델을 예약해보세요</h1>
         </div>
-        <div className='text-[32px] font-light mx-8 pb-4 color=[#000]'> 
-            <h1>도움이 필요하세요?</h1>
+        <div className='text-[14px] font-light pb-4 color=[#4D4D4D]'>
+            <p>고객님의 정보를 입력하시면 이메일로 보내드리겠습니다.</p>
         </div>
-        <div className='text-[14px] font-light mx-8 pb-8 color=[#4D4D4D] max-w-[60%]'>
-            <p>어떤것을 도와드릴까요? 사소한 내용도 환영입니다. 
-                문의를 주시면 연락을 드리겠습니다.</p>
-        </div>
-        <div className="flex justify-between px-8 py-8 bg-[#F9F9FA] rounded-lg mb-[8px]">
         <div>
-            <div className='flex gap-[8px] mb-[8px]'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z" fill="black"/>
-                </svg>
-                <h1 className="text-[14px] font-medium color-[#000]">이메일 보내기</h1>
+        <input
+        className='py-[24px] text-[14px] color=[#B2B2B2]'
+          type='text'
+          placeholder='이름을 입력하세요'
+          onChange={handleNameChange}
+        />
+        
+        <div
+         className='focus:border-b border-b-[1px] border-gray-500 mb-4'
+        >
+        </div>
+      </div>
+      <div>
+        <input
+        className='py-[24px] '
+          type='text'
+          placeholder='이메일 주소를 입력하세요'
+          onChange={handleEmailChange}
+        />
+        <div
+         className='focus:border-b border-b-[1px] border-gray-500 mb-4'
+        >
+        </div>
+      </div>
+      <div>
+        <input
+        className='py-[24px] '
+          type='text'
+          placeholder='휴대전화번호를 입력하세요'
+          onChange={handlePhoneChange}
+        />
+        <div
+         className='focus:border-b border-b-[1px] border-gray-500 mb-16'
+        >
+        </div>
+      </div>
+      <button
+       disabled={isButtonDisabled}
+      className=" flex justify-center items-center gap-1 w-full bg-gray text-white py-[10px] px-4 text-[12px] font-medium rounded-full">
+    <span>
+            완료
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <g clipPath="url(#clip0_2619_2241)">
+              <path d="M10.02 4.23828L9.4875 4.77078L13.3425 8.62578H3.375V9.37578H13.35L9.4875 13.2383L10.0125 13.7633L14.7825 9.00828L10.02 4.23828Z" fill="white"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_2619_2241">
+                <rect width="18" height="18" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+            </button>
             </div>
-            <p className="text-[12px] font-light color-[#6E6E73] max-w-[60%]">이메일을 선호하십니까? 스페이스웨이브 전문가가 영업일 기준
-            하루 이내에 답변을 드리겠습니다.</p>
-        </div>
-        </div>
-        <div className="flex justify-between  px-8 py-8 bg-[#F9F9FA] rounded-lg gap-2">
-        <div>
-        <div className='flex gap-[8px] mb-[8px]'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M6.54 5C6.6 5.89 6.75 6.76 6.99 7.59L5.79 8.79C5.38 7.59 5.12 6.32 5.03 5H6.54ZM16.4 17.02C17.25 17.26 18.12 17.41 19 17.47V18.96C17.68 18.87 16.41 18.61 15.2 18.21L16.4 17.02ZM7.5 3H4C3.45 3 3 3.45 3 4C3 13.39 10.61 21 20 21C20.55 21 21 20.55 21 20V16.51C21 15.96 20.55 15.51 20 15.51C18.76 15.51 17.55 15.31 16.43 14.94C16.33 14.9 16.22 14.89 16.12 14.89C15.86 14.89 15.61 14.99 15.41 15.18L13.21 17.38C10.38 15.93 8.06 13.62 6.62 10.79L8.82 8.59C9.1 8.31 9.18 7.92 9.07 7.57C8.7 6.45 8.5 5.25 8.5 4C8.5 3.45 8.05 3 7.5 3Z" fill="black"/>
-            </svg>
-          <h1 className="text-[14px] font-medium color-[#000]">전화로 문의하기</h1>
-        </div>
-          <p className="text-[12px] font-light color-[#6E6E73]">월요일부터 토요일까지 오전 8시부터 오후 7시까지 가능한 <br></br>
-          <span style={{ color: '#FF5B00' }}>(000) 000-0000</span>으로 전화주시기 바랍니다..</p>
-        </div>
-        </div>
-      </DialogTitle>
     </Dialog>
   );
 
 const CustomizationPanel = () => {
     const { showModal } = useModal();
+    const[name, setName]=useState('');
+    const[email, setEmail]=useState('');
+    const[phone, setPhone]=useState('');
+    const [formElaments ,setFormElements] = useState({
+        name:'',
+        email:'',
+        phone:''
+    })
+    const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+    
+    const handleNameChange = (e:any) => {
+        setName(e.target.value);
+      };
+
+      const handleEmailChange = (e:any) => {
+        setEmail(e.target.value);
+      };
+
+      const handlePhoneChange = (e:any) => {
+        setPhone(e.target.value);
+      };
+
+      const validateInputs = () => {
+        if (!name || !email || !phone) {
+          setIsButtonDisabled(true);
+        } else {
+          setIsButtonDisabled(false);
+        }
+      };
+    //   useEffect(()=> {
+    //     validateInputs()
+    //   },[name,email,phone])
+
     const [customizationOptions ,setCustomizationOptions] = useState<CustomizationOptionsProps[]>([
         {
             id:1,
@@ -302,7 +365,7 @@ const CustomizationPanel = () => {
                         <path d="M5.66628 1.63938V8.99938H6.33294V1.63938L8.43294 3.73271L8.89961 3.26604L5.99961 0.359375L3.09961 3.26604L3.56628 3.73271L5.66628 1.63938Z" fill="#1C1C1F"/>
                     </svg>
                 </div>
-                <div className="customizeButton flex gap-[4px] px-4 py-[10px] text-white rounded-full justify-center w-full items-center bg-offBlack" onClick={() => showModal(SimpleDialog, { title: 'popup' })}>
+                <div className="customizeButton flex gap-[4px] px-4 py-[10px] text-white rounded-full justify-center w-full items-center bg-offBlack" onClick={() => showModal(SimpleDialog, { title: 'popup' , handleNameChange: {handleNameChange}, handleEmailChange: {handleEmailChange}, handlePhoneChange: {handlePhoneChange}, isButtonDisabled:{isButtonDisabled} })}>
                     <span className='text-[12px] font-medium'>커스텀하기</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <g clipPath="url(#clip0_2583_274)">
