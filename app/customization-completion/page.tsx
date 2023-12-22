@@ -3,18 +3,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Img from "@/assets/customization/customization-banner-img.png";
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import axiosInstance from "../../api/axioInstance";
 import { useSearchParams } from "next/navigation";
 import CallInquery from "../../components/CallInquery";
 import { makeImageUrl } from "../../lib/utils";
 
-
 const Completion = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const pdfRefElement=useRef<HTMLDivElement>(null);
+  const pdfRefElement = useRef<HTMLDivElement>(null);
 
   const [result, setResult] = useState<any>(null);
 
@@ -40,53 +39,70 @@ const Completion = () => {
     }
   };
   const handlePdfExport = () => {
-    debugger
-    if(pdfRefElement.current) {
-      let pdfRef=pdfRefElement.current;
-      const pdfHeader = document.createElement('div');
-      pdfHeader.style.padding="32px 0";
-      pdfHeader.style.backgroundColor='black'
-      pdfHeader.style.display='flex';
-      pdfHeader.style.justifyContent='center';
-      pdfHeader.style.width = '100%';
-      pdfHeader.style.gridRow = '1';
+    debugger;
+    if (pdfRefElement.current) {
+      // const clonedRef:HTMLElement = (pdfRefElement.current.cloneNode(true) as HTMLElement)
+      // const pdfHeader = document.createElement('div');
+      // pdfHeader.style.padding="32px 0";
+      // pdfHeader.style.backgroundColor='black'
+      // pdfHeader.style.display='flex';
+      // pdfHeader.style.justifyContent='center';
+      // pdfHeader.style.width = '100%';
+      // pdfHeader.style.gridRow = '1';
 
+      // const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      // svgIcon.setAttribute('width', '24');
+      // svgIcon.setAttribute('height', '24');
+      // svgIcon.setAttribute('viewBox','0 0 24 24');
+      // svgIcon.setAttribute('fill', 'none');
 
-      const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svgIcon.setAttribute('width', '24');
-      svgIcon.setAttribute('height', '24');
-      svgIcon.setAttribute('viewBox','0 0 24 24');
-      svgIcon.setAttribute('fill', 'none');
-      
+      // const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      // path.setAttribute('fill-rule', 'evenodd');
+      // path.setAttribute('clip-rule', 'evenodd');
+      // path.setAttribute('d', 'M16.5146 3.41637V4.48003e-07H13.2117H9.90879L6.60586 0V3.41637V13.6655V17.0819H9.90879H13.2117V20.5836H3.30294V4.48003e-07H0V20.5836V24H3.30294H13.2117H16.5146V20.5836V17.0819H19.8176H23.1205V13.6655V4.48003e-07H19.8176V13.6655H16.5146V3.41637ZM9.90879 3.41637V13.6655H13.2117V3.41637H9.90879Z');
+      // path.setAttribute('fill', 'white');
 
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('fill-rule', 'evenodd');
-      path.setAttribute('clip-rule', 'evenodd');
-      path.setAttribute('d', 'M16.5146 3.41637V4.48003e-07H13.2117H9.90879L6.60586 0V3.41637V13.6655V17.0819H9.90879H13.2117V20.5836H3.30294V4.48003e-07H0V20.5836V24H3.30294H13.2117H16.5146V20.5836V17.0819H19.8176H23.1205V13.6655V4.48003e-07H19.8176V13.6655H16.5146V3.41637ZM9.90879 3.41637V13.6655H13.2117V3.41637H9.90879Z');
-      path.setAttribute('fill', 'white');
+      // svgIcon.appendChild(path);
 
-      svgIcon.appendChild(path);
+      // pdfHeader.appendChild(svgIcon);
 
-      pdfHeader.appendChild(svgIcon);
+      // clonedRef.style.display = 'grid';
+      // clonedRef.style.gridTemplateRows = 'auto 1fr';
+      // clonedRef.appendChild(pdfHeader);
+      // console.log(clonedRef,78)
+      // html2canvas(pdfRefElement.current).then((canvas) => {
 
-      pdfRef.style.display = 'grid';
-      pdfRef.style.gridTemplateRows = 'auto 1fr';
-      pdfRef.appendChild(pdfHeader);
-
-      html2canvas(pdfRef).then((canvas) => {
-        const pdf = new jsPDF('p', 'px', [canvas.width, canvas.height + 50]);
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
-        pdf.save(`product-receipt.pdf`);
-        pdfRef.removeChild(pdfHeader); 
+      // const pdf = new jsPDF('p', 'px', [canvas.width, canvas.height + 50]);
+      // pdf.html(pdfRefElement.current)
+      // pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+      // pdf.save(`product-receipt.pdf`);
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "pt",
+        format: "a4",
+      });
+      pdf.html(pdfRefElement.current, {
+        callback: function (doc) {
+          doc.save("file.pdf");
+        },
+        margin: [60, 60, 60, 60],
+        x: 32,
+        y: 32,
+        html2canvas: {
+          scale: 0.3, 
+          width: 1000,
+        },
       });
     }
   };
 
   return (
     <>
-      <div className=" py-16 md:py-32 w-full">
-        <div ref={pdfRefElement} className="flex flex-col justify-center items-center text-center w-full md:w-[600px] m-auto">
-         
+      <div className=" py-16 md:py-32 w-full relative">
+        <div
+          ref={pdfRefElement}
+          className="flex flex-col justify-center items-center text-center w-full md:w-[600px] m-auto"
+        >
           <div className="text-[28px] md:text-[40px] font-light mb-4">
             <span>
               축하합니다!
@@ -108,10 +124,16 @@ const Completion = () => {
               objectFit="cover"
             />
           </div>
-          <div className="mb-8 mt-16 md:my-16 py-8  border-y-[1px]  flex justify-center w-full">
+          <div
+            id="ignored"
+            className="mb-8 mt-16 md:my-16 py-8  border-y-[1px]  flex justify-center w-full"
+          >
             <div className="flex gap-8">
               <div className="py-2 flex flex-col gap-2 items-center cursor-pointer">
-                <div className=" rounded-full border-[1px] p-[11px] flex justify-center items-center w-[42px] h-[42px]" onClick={handlePdfExport}>
+                <div
+                  className=" rounded-full border-[1px] p-[11px] flex justify-center items-center w-[42px] h-[42px]"
+                  onClick={handlePdfExport}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -163,30 +185,30 @@ const Completion = () => {
           <div className="flex justify-center">
             <div className="px-4 py-2 flex items-center gap-[8px] bg-jetBlack rounded-full w-fit">
               <span className="text-white text-[12px]">홈으로 이동</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="19"
-                  height="19"
-                  viewBox="0 0 19 19"
-                  fill="none"
-                >
-                  <g clipPath="url(#clip0_3200_1508)">
-                    <path
-                      d="M10.52 4.57031L9.9875 5.10281L13.8425 8.95781H3.875V9.70781H13.85L9.9875 13.5703L10.5125 14.0953L15.2825 9.34031L10.52 4.57031Z"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 19 19"
+                fill="none"
+              >
+                <g clipPath="url(#clip0_3200_1508)">
+                  <path
+                    d="M10.52 4.57031L9.9875 5.10281L13.8425 8.95781H3.875V9.70781H13.85L9.9875 13.5703L10.5125 14.0953L15.2825 9.34031L10.52 4.57031Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_3200_1508">
+                    <rect
+                      width="18"
+                      height="18"
                       fill="white"
+                      transform="translate(0.5 0.333008)"
                     />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_3200_1508">
-                      <rect
-                        width="18"
-                        height="18"
-                        fill="white"
-                        transform="translate(0.5 0.333008)"
-                      />
-                    </clipPath>
-                  </defs>
-                </svg>
+                  </clipPath>
+                </defs>
+              </svg>
             </div>
           </div>
         </div>
