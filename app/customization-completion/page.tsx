@@ -1,23 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Img from "@/assets/customization/customization-banner-img.png";
-import { useSelector } from "react-redux";
-import {
-  ModelColors,
-  ModelFloorOptions,
-  ModelSecondOption,
-  OptionDetail,
-} from "../redux/types";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import axiosInstance from "../../api/axioInstance";
 import { useSearchParams } from "next/navigation";
 import CallInquery from "../../components/CallInquery";
 import { makeImageUrl } from "../../lib/utils";
 
+
 const Completion = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const pdfRefElement=useRef<HTMLDivElement>(null);
 
   const [result, setResult] = useState<any>(null);
 
@@ -42,11 +39,54 @@ const Completion = () => {
       console.error("e", e);
     }
   };
+  const handlePdfExport = () => {
+    debugger
+    if(pdfRefElement.current) {
+      let pdfRef=pdfRefElement.current;
+      const pdfHeader = document.createElement('div');
+      pdfHeader.style.padding="32px 0";
+      pdfHeader.style.backgroundColor='black'
+      pdfHeader.style.display='flex';
+      pdfHeader.style.justifyContent='center';
+      pdfHeader.style.width = '100%';
+      pdfHeader.style.gridRow = '1';
+
+
+      const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgIcon.setAttribute('width', '24');
+      svgIcon.setAttribute('height', '24');
+      svgIcon.setAttribute('viewBox','0 0 24 24');
+      svgIcon.setAttribute('fill', 'none');
+      
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('fill-rule', 'evenodd');
+      path.setAttribute('clip-rule', 'evenodd');
+      path.setAttribute('d', 'M16.5146 3.41637V4.48003e-07H13.2117H9.90879L6.60586 0V3.41637V13.6655V17.0819H9.90879H13.2117V20.5836H3.30294V4.48003e-07H0V20.5836V24H3.30294H13.2117H16.5146V20.5836V17.0819H19.8176H23.1205V13.6655V4.48003e-07H19.8176V13.6655H16.5146V3.41637ZM9.90879 3.41637V13.6655H13.2117V3.41637H9.90879Z');
+      path.setAttribute('fill', 'white');
+
+      svgIcon.appendChild(path);
+
+      pdfHeader.appendChild(svgIcon);
+
+      pdfRef.style.display = 'grid';
+      pdfRef.style.gridTemplateRows = 'auto 1fr';
+      pdfRef.appendChild(pdfHeader);
+
+      html2canvas(pdfRef).then((canvas) => {
+        const pdf = new jsPDF('p', 'px', [canvas.width, canvas.height + 50]);
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save(`product-receipt.pdf`);
+        pdfRef.removeChild(pdfHeader); 
+      });
+    }
+  };
 
   return (
     <>
       <div className=" py-16 md:py-32 w-full">
-        <div className="flex flex-col justify-center items-center text-center w-full md:w-[600px] m-auto">
+        <div ref={pdfRefElement} className="flex flex-col justify-center items-center text-center w-full md:w-[600px] m-auto">
+         
           <div className="text-[28px] md:text-[40px] font-light mb-4">
             <span>
               축하합니다!
@@ -71,7 +111,7 @@ const Completion = () => {
           <div className="mb-8 mt-16 md:my-16 py-8  border-y-[1px]  flex justify-center w-full">
             <div className="flex gap-8">
               <div className="py-2 flex flex-col gap-2 items-center cursor-pointer">
-                <div className=" rounded-full border-[1px] p-[11px] flex justify-center items-center w-[42px] h-[42px]">
+                <div className=" rounded-full border-[1px] p-[11px] flex justify-center items-center w-[42px] h-[42px]" onClick={handlePdfExport}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -120,10 +160,9 @@ const Completion = () => {
               {result?.totalPrice.toLocaleString()}원
             </span>
           </div>
-          <div>
-            <div className="px-4 py-2 flex gap-[4px] bg-jetBlack rounded-full">
+          <div className="flex justify-center">
+            <div className="px-4 py-2 flex items-center gap-[8px] bg-jetBlack rounded-full w-fit">
               <span className="text-white text-[12px]">홈으로 이동</span>
-              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="19"
@@ -148,7 +187,6 @@ const Completion = () => {
                     </clipPath>
                   </defs>
                 </svg>
-              </span>
             </div>
           </div>
         </div>
