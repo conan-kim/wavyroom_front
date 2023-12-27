@@ -18,8 +18,10 @@ import {
 } from "../redux/actions/customizationActions";
 import Link from "next/link";
 import { RootState } from "../redux/reducers";
+import { useTranslation } from "react-i18next";
 
 const ModelDetail = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data } = useSelector((state: any) => state.modelDetail);
   const { data: modelsList } = useSelector(
@@ -243,18 +245,18 @@ const ModelDetail = () => {
             </div>
             <div className="flex flex-col bg-white lg:bg-lightGray flex-1 sm:px-4 md:px-8 py-12 group-[.is-dark]:bg-offBlack group-[.is-dark]:text-white">
               <div className="text-[24px] md:text-[28px] lg:text-[32px] pb-6 border-b border-midGray">
-                {data.name} 스펙
+                {data.name} {t('sidebar.details.specification')}
               </div>
               <div className="grid grid-cols-2">
                 <div className="flex flex-col border-b border-midGray py-4 gap-2 pr-4">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    가격
+                  {t('sidebar.details.price')}
                   </div>
                   <div className="text-[14px] font-light">{data.minPrice}</div>
                 </div>
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    규격
+                  {t('sidebar.details.standard')}
                   </div>
                   <div className="text-[14px] font-light">{data.size}평형</div>
                 </div>
@@ -262,7 +264,7 @@ const ModelDetail = () => {
               <div className="grid grid-cols-2">
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    평형 디테일
+                  {t('sidebar.details.floor-plan')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.sizeDetail}
@@ -270,7 +272,7 @@ const ModelDetail = () => {
                 </div>
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    외장재
+                  {t('sidebar.details.exterior-material')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.exteriorMaterial?.map((x: any, index: number) => {
@@ -286,7 +288,7 @@ const ModelDetail = () => {
               </div>
               <div className="flex flex-col border-b border-midGray py-4  gap-2">
                 <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                  외부색
+                {t('sidebar.details.exterior-color')}
                 </div>
                 <div className="flex flex-col md:flex-row items-start justify-left gap-2 md:gap-4 md:items-center">
                   {data.modelColors.map((x: any, i: number) => {
@@ -317,7 +319,7 @@ const ModelDetail = () => {
               <div className="grid grid-cols-2">
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    단열
+                  {t('sidebar.details.insulation')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.insulation}
@@ -325,7 +327,7 @@ const ModelDetail = () => {
                 </div>
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    골조 (스트럭쳐)
+                  {t('sidebar.details.framework')}
                   </div>
                   <div className="text-[14px] font-light">{data.structure}</div>
                 </div>
@@ -333,7 +335,7 @@ const ModelDetail = () => {
               <div className="grid grid-cols-2">
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    창호
+                  {t('sidebar.details.windows')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.windows.map((x: any, i: number) => {
@@ -348,7 +350,7 @@ const ModelDetail = () => {
                 </div>
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    가구
+                  {t('sidebar.details.furniture')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.furniture.map((x: any) => {
@@ -365,7 +367,7 @@ const ModelDetail = () => {
               <div className="grid grid-cols-2">
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    용도
+                  {t('sidebar.details.purpose')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.purpose.map((x: any) => {
@@ -380,7 +382,7 @@ const ModelDetail = () => {
                 </div>
                 <div className="flex flex-col border-b border-midGray py-4 pr-4 gap-2">
                   <div className="text-[14px] font-normal group-[.is-dark]:opacity-40">
-                    용도 설명
+                  {t('sidebar.details.purpose-discription')}
                   </div>
                   <div className="text-[14px] font-light">
                     {data.purposeDetail.map((x: any) => {
